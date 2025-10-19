@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Order – Air’s Resto</title>
+  <style>
+    body { font-family: "Noto Sans", sans-serif; background:#f9f3e6; color:#3e2b1e; margin:0; padding:0; }
+    .navbar { background:#5b3c2c; color:#fff; display:flex; justify-content:space-between; align-items:center; padding:14px 30px; }
+    .logo { font-weight:700; }
+    .navbar ul { list-style:none; display:flex; gap:1rem; margin:0; padding:0; }
+    .navbar a { color:#fff; text-decoration:none; }
+    .navbar a.active, .navbar a:hover { color:#f3d5a6; }
+    .hero { background:linear-gradient(#7b5642,#5b3c2c); color:#fff; text-align:center; padding:50px 0; border-radius:0 0 16px 16px; }
+    .menu-card { background:#fffdf6; width:90%; max-width:800px; margin:3rem auto; border-radius:16px; box-shadow:0 4px 12px rgba(0,0,0,0.12); padding:2rem; }
+    .menu-card h2 { background:#5b3c2c; color:#fff; padding:10px; border-radius:10px; text-align:center; margin-bottom:1rem; }
+    .menu-grid label { display:block; padding:10px; border:1px solid #e2c8ad; border-radius:8px; background:#f9f1e2; margin-bottom:0.6rem; cursor:pointer; }
+    .menu-grid label:hover { background:#f2e2cd; }
+    input[type="text"] { width:100%; padding:10px; margin:0.5rem 0; border-radius:8px; border:1px solid #d1b89f; background:#fffaf3; color:#3e2b1e; }
+    .btn { background:#5b3c2c; color:#fff; padding:10px 22px; border-radius:25px; border:none; cursor:pointer; font-weight:700; }
+    .btn:hover { background:#3e2b1e; }
+    .back-btn { background:#fffaf3; color:#5b3c2c; border:1px solid #e2c8ad; padding:8px 18px; border-radius:20px; text-decoration:none; display:inline-block; font-weight:700; }
+    .back-btn:hover { background:#f2e2cd; }
+    .summary { background:#fff9ef; border-left:5px solid #5b3c2c; border-radius:10px; padding:1rem; margin-top:1.2rem; font-family:"Courier New", monospace; white-space:pre-wrap; }
+    .center-button { text-align:center; margin-top:1.2rem; }
+    footer { background:#3e2b1e; color:#fffaf3; text-align:center; padding:14px 0; margin-top:2rem; }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">Air’s Resto</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="order.html" class="active">Order Now</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Order Your Favorites</h1>
+    <p>Fresh, Fast, and Served with Care</p>
+  </section>
+
+  <main>
+    <div class="menu-card">
+      <h2>Food Ordering Form</h2>
+      <h3>Menu Selection</h3>
+      <form id="orderForm" class="menu-grid" onsubmit="return false;">
+        <label><input type="checkbox" name="item" value="120" data-name="Pizza"> Pizza – ₱120.00</label>
+        <label><input type="checkbox" name="item" value="60" data-name="Ice Cream"> Ice Cream – ₱60.00</label>
+        <label><input type="checkbox" name="item" value="70" data-name="Fries"> Fries – ₱70.00</label>
+        <label><input type="checkbox" name="item" value="40" data-name="Drinks"> Drinks – ₱40.00</label>
+        <label><input type="checkbox" name="item" value="100" data-name="Burger"> Burger – ₱100.00</label>
+      </form>
+
+      <h3>Customer Details</h3>
+      <input type="text" id="custName" placeholder="Full Name" required>
+      <input type="text" id="address" placeholder="Address" required>
+      <input type="text" id="contact" placeholder="Contact Number" required>
+
+      <div style="display:flex; gap:12px; margin-top:12px; align-items:center;">
+        <button id="createOrder" class="btn">Create Order</button>
+        <a href="index.html" class="back-btn">← Back to Home</a>
+      </div>
+
+      <div class="summary" id="summaryBox">
+        <h3>🧾 Order Summary</h3>
+        <div id="orderSummaryText">Your order will appear here.</div>
+      </div>
+    </div>
+  </main>
+
+  <footer>© 1967 Air’s Resto. All Rights Reserved.</footer>
+
+  <script>
+    function createOrder() {
+      const name = document.getElementById('custName').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const contact = document.getElementById('contact').value.trim();
+      const checked = Array.from(document.querySelectorAll('input[name="item"]:checked'));
+      const out = document.getElementById('orderSummaryText');
+      if (!name || !address || !contact || checked.length === 0) {
+        out.innerHTML = "Please complete all customer details and select at least one item.";
+        return;
+      }
+      let total = 0;
+      const lines = checked.map(cb => {
+        const label = cb.getAttribute('data-name') || 'Item';
+        const price = parseFloat(cb.value) || 0;
+        total += price;
+        return `${label} – ₱${price.toFixed(2)}`;
+      });
+      const now = new Date();
+      const header = `Order for: ${name}\nAddress: ${address}\nContact: ${contact}\nDate: ${now.toLocaleString()}\n\nItems:\n`;
+      const itemsText = lines.join('\n');
+      const footer = `\n\nTotal: ₱${total.toFixed(2)}`;
+      out.textContent = header + itemsText + footer;
+      const summaryBox = document.getElementById('summaryBox');
+      summaryBox.style.boxShadow = "0 8px 20px rgba(0,0,0,0.18)";
+      setTimeout(() => summaryBox.style.boxShadow = "0 4px 12px rgba(0,0,0,0.12)", 800);
+      summaryBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    document.getElementById('createOrder').addEventListener('click', createOrder);
+  </script>
+</body>
+</html>
