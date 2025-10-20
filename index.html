@@ -1,28 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Air’s Resto</title>
+
   <style>
-    body { font-family: "Noto Sans", sans-serif; background:#f9f3e6; color:#3e2b1e; margin:0; padding:0; }
-    .navbar { background:#5b3c2c; color:#fff; display:flex; justify-content:space-between; align-items:center; padding:14px 30px; }
-    .logo { font-weight:700; font-size:1.1rem; }
-    .navbar ul { list-style:none; display:flex; gap:1rem; margin:0; padding:0; }
-    .navbar a { color:#fff; text-decoration:none; }
-    .navbar a.active, .navbar a:hover { color:#f3d5a6; }
-    .hero { background:linear-gradient(#7b5642,#5b3c2c); color:#fff; text-align:center; padding:50px 0; border-radius:0 0 16px 16px; }
-    .menu-card { background:#fffdf6; width:90%; max-width:820px; margin:3rem auto; border-radius:16px; box-shadow:0 4px 12px rgba(0,0,0,0.12); padding:2rem; }
-    .menu-card h2 { background:#5b3c2c; color:#fff; padding:10px; border-radius:10px; text-align:center; margin-bottom:1rem; }
-    table { width:100%; border-collapse:collapse; }
-    th { background:#f3d5a6; padding:10px; text-align:left; }
-    td { background:#fffaf3; padding:10px; border-bottom:1px solid #eedac1; }
-    .btn { background:#5b3c2c; color:#fff; padding:10px 22px; border-radius:25px; text-decoration:none; display:inline-block; font-weight:700; }
-    .center-button { text-align:center; margin-top:1.2rem; }
-    .hours-box { text-align:center; margin:1rem auto 3rem; display:inline-block; background:#fffdf6; padding:8px 16px; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.06); font-weight:700; }
-    footer { background:#3e2b1e; color:#fffaf3; text-align:center; padding:14px 0; margin-top:2rem; }
+    body {
+      font-family: "Noto Sans", sans-serif;
+      background: #f9f3e6;
+      color: #3e2b1e;
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .navbar {
+      background: #5b3c2c;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 30px;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar a {
+      color: #fff;
+      transition: color 0.2s ease;
+    }
+
+    .navbar a.active,
+    .navbar a:hover {
+      color: #f3d5a6;
+    }
+
+    .hero {
+      background: linear-gradient(#7b5642, #5b3c2c);
+      color: #fff;
+      text-align: center;
+      padding: 50px 0;
+      border-radius: 0 0 16px 16px;
+    }
+
+    .menu-card {
+      background: #fffdf6;
+      width: 90%;
+      max-width: 820px;
+      margin: 3rem auto;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      padding: 2rem;
+    }
+
+    .menu-card h2 {
+      background: #5b3c2c;
+      color: #fff;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      background: #f3d5a6;
+      padding: 10px;
+      text-align: left;
+    }
+
+    td {
+      background: #fffaf3;
+      padding: 10px;
+      border-bottom: 1px solid #eedac1;
+    }
+
+    .btn {
+      background: #5b3c2c;
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 25px;
+      font-weight: 700;
+      display: inline-block;
+      transition: background 0.2s ease;
+    }
+
+    .btn:hover {
+      background: #7b5642;
+    }
+
+    .center-button {
+      text-align: center;
+      margin-top: 1.2rem;
+    }
+
+    .hours-box {
+      text-align: center;
+      margin: 1rem auto 3rem;
+      display: inline-block;
+      background: #fffdf6;
+      padding: 8px 16px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+      font-weight: 700;
+    }
+
+    footer {
+      background: #3e2b1e;
+      color: #fffaf3;
+      text-align: center;
+      padding: 14px 0;
+      margin-top: 2rem;
+    }
   </style>
 </head>
+
 <body>
   <header class="navbar">
     <div class="logo">Air’s Resto</div>
@@ -44,7 +156,10 @@
     <h2>Menu Pricelist</h2>
     <table>
       <thead>
-        <tr><th>Product Name</th><th>Price (₱)</th></tr>
+        <tr>
+          <th>Product Name</th>
+          <th>Price (₱)</th>
+        </tr>
       </thead>
       <tbody>
         <tr><td>Pizza</td><td>₱120.00</td></tr>
@@ -54,12 +169,16 @@
         <tr><td>Burger</td><td>₱100.00</td></tr>
       </tbody>
     </table>
+
     <div class="center-button">
-      <a href="order.html" class="btn">🛒 Order Now</a>
+      <a href="order.html" class="btn">Order Now</a>
     </div>
   </section>
 
   <div class="hours-box">Opens: 11:00 AM – 10:00 PM</div>
-  <footer>© 1967 Air’s Resto. All Rights Reserved.</footer>
+
+  <footer>
+    © 1967 Air’s Resto. All Rights Reserved.
+  </footer>
 </body>
 </html>
